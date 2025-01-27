@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talonario Virtual - Rifa de Moto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('fondo-moto.jpg'); /* Aquí puedes cambiar la imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        h1 {
+            color: white;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .number {
+            padding: 20px;
+            background-color: #007bff; /* Color azul */
+            color: white;
+            font-size: 24px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .number:hover {
+            background-color: #0056b3;
+        }
+        .sold {
+            background-color: #f44336; /* Rojo para vendidos */
+        }
+        .whatsapp-btn {
+            margin-top: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Talonario Virtual - Rifa de Moto</h1>
+    <p>Haz clic en un número para comprarlo. Los números vendidos estarán en rojo.</p>
+
+    <div class="grid" id="numberGrid"></div>
+
+    <a href="https://wa.me/57TU_NUMERO_DE_WHATSAPP" class="whatsapp-btn" target="_blank">Contactar por WhatsApp</a>
+
+    <script>
+        // Crear el talonario de números del 1 al 1,000
+        const totalNumbers = 1000;
+        const soldNumbers = [5, 23, 150, 278]; // Números vendidos, puedes modificar esta lista
+
+        const numberGrid = document.getElementById("numberGrid");
+
+        for (let i = 1; i <= totalNumbers; i++) {
+            const numberDiv = document.createElement("div");
+            numberDiv.textContent = i;
+            numberDiv.className = "number";
+
+            // Verificar si el número está vendido
+            if (soldNumbers.includes(i)) {
+                numberDiv.classList.add("sold");
+                numberDiv.textContent = i + " (Vendido)";
+            } else {
+                numberDiv.onclick = function () {
+                    window.open('https://wa.me/57TU_NUMERO_DE_WHATSAPP?text=Quiero%20comprar%20el%20número%20' + i, '_blank');
+                };
+            }
+
+            numberGrid.appendChild(numberDiv);
+        }
+    </script>
+
+</body>
+</html>
